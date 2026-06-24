@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIGEONTG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="auth-screen">
+        <div class="auth-container">
+            <div id="auth-step-phone">
+                <h2>PIGEONTG</h2>
+                <p>Enter your phone number to access node</p>
+                <input type="tel" id="reg-phone-input" placeholder="+380 00 000 0000">
+                <div id="reg-code-box" style="display: none;">
+                    <input type="text" id="reg-code-input" placeholder="Verification Code">
+                </div>
+                <button class="auth-btn" id="reg-send-btn">Get Code</button>
+            </div>
+            <div id="auth-step-profile" style="display: none;">
+                <h2>CREATE PROFILE</h2>
+                <p>Choose your hacker nickname</p>
+                <input type="text" id="reg-name-input" placeholder="Nickname">
+                <button class="auth-btn" id="reg-complete-btn">Initialize</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="app-main-container" style="display: none;">
+        
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <div class="tg-brand-container">
+                    <span class="tg-menu-icon">☰</span>
+                    <h2 class="tg-app-title">PIGEONTG</h2>
+                </div>
+                <div class="user-meta">
+                    <div id="balance-display">150 WRC</div>
+                </div>
+                <button id="btn-click-earn">+ Earn</button>
+            </div>
+
+            <div class="sidebar-content">
+                <div class="view active" id="view-chats">
+                    <div class="search-bar-container">
+                        <input type="text" class="search-bar" placeholder="Search...">
+                    </div>
+                    <div class="chat-list"></div>
+                </div>
+
+                <div class="view" id="view-shop">
+                    <div class="shop-container">
+                        <div class="tg-section-header">
+                            <h3 id="heading-shop-title">Telegram Gifts</h3>
+                            <p class="tg-section-subtitle">Buy and collect unique pigeon gifts</p>
+                        </div>
+                        
+                        <div class="tg-gift-item" data-cost="50" data-name="Classic Pigeon">
+                            <div class="tg-gift-icon-box">🕊️</div>
+                            <div class="tg-gift-info">
+                                <h4>Classic Pigeon</h4>
+                                <span class="tg-gift-count">1 of 10,000 available</span>
+                            </div>
+                            <button class="tg-gift-buy-btn">50 WRC</button>
+                        </div>
+
+                        <div class="tg-gift-item" data-cost="120" data-name="Cyber Pigeon">
+                            <div class="tg-gift-icon-box">🤖</div>
+                            <div class="tg-gift-info">
+                                <h4>Cyber Pigeon</h4>
+                                <span class="tg-gift-count">1 of 2,500 available</span>
+                            </div>
+                            <button class="tg-gift-buy-btn">120 WRC</button>
+                        </div>
+
+                        <div class="tg-gift-item" data-cost="300" data-name="Golden Pigeon">
+                            <div class="tg-gift-icon-box">👑</div>
+                            <div class="tg-gift-info">
+                                <h4>Golden Pigeon</h4>
+                                <span class="tg-gift-count">Rare #777 Collectible</span>
+                            </div>
+                            <button class="tg-gift-buy-btn">300 WRC</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view" id="view-profile">
+                    <div class="tg-profile-container">
+                        <div class="tg-profile-avatar-section">
+                            <div class="tg-large-avatar" id="prof-avatar-placeholder">👤</div>
+                            <h3 id="chat-user-title">User</h3>
+                            <p class="tg-status-online">online</p>
+                        </div>
+
+                        <div class="tg-profile-list">
+                            <div class="tg-profile-item">
+                                <span class="tg-prof-icon">📞</span>
+                                <div class="tg-prof-details">
+                                    <input type="text" id="phone-input" readonly value="+380...">
+                                    <label id="label-prof-phone">Phone</label>
+                                </div>
+                            </div>
+                            <div class="tg-profile-item">
+                                <span class="tg-prof-icon">ℹ️</span>
+                                <div class="tg-prof-details">
+                                    <input type="text" id="name-input" readonly value="@username">
+                                    <label id="label-prof-name">Username</label>
+                                </div>
+                            </div>
+                            <div class="tg-profile-item">
+                                <span class="tg-prof-icon">📝</span>
+                                <div class="tg-prof-details">
+                                    <p class="tg-bio-text">Pigeon Network Node Operator. Encrypted communication client.</p>
+                                    <label id="label-prof-inv">Bio</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tg-inventory-section">
+                            <div class="tg-section-header-mini" id="label-prof-inv">My Received Gifts</div>
+                            <div id="gifts-inventory" class="tg-gifts-grid">None</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="view" id="view-settings">
+                    <div class="settings-list">
+                        <h3 id="heading-settings-title">Settings</h3>
+                        
+                        <label id="label-set-lang">Interface Language</label>
+                        <select id="lang-selector">
+                            <option value="en">English</option>
+                            <option value="ua">Українська</option>
+                            <option value="pl">Polski</option>
+                            <option value="sk">Slovensky</option>
+                        </select>
+
+                        <label id="label-set-theme">Chat Themes</label>
+                        <select id="theme-selector">
+                            <option value="default">Cyber Cyan</option>
+                            <option value="matrix-green">Matrix Green</option>
+                            <option value="neon-purple">Neon Purple</option>
+                            <option value="golden-sun">Golden Sun</option>
+                        </select>
+
+                        <div class="settings-section-title" id="set-sec-privacy">Privacy and Security</div>
+                        <div class="settings-item">
+                            <span id="set-incognito">Phone Number Privacy</span>
+                            <div class="toggle-switch"></div>
+                        </div>
+                        <div class="settings-item">
+                            <span id="set-passcode">Passcode Lock</span>
+                            <div class="toggle-switch"></div>
+                        </div>
+                        <div class="settings-item">
+                            <span id="set-twostep">Two-Step Verification</span>
+                            <div class="toggle-switch"></div>
+                        </div>
+
+                        <div class="settings-section-title" id="set-sec-notif">Notifications and Sounds</div>
+                        <div class="settings-item">
+                            <span id="set-notif-chats">Private Chats</span>
+                            <div class="toggle-switch active"></div>
+                        </div>
+                        <div class="settings-item">
+                            <span id="set-notif-groups">Group Notifications</span>
+                            <div class="toggle-switch active"></div>
+                        </div>
+
+                        <div class="settings-section-title" id="set-sec-data">Data and Storage</div>
+                        <div class="settings-item">
+                            <span id="set-eco">Auto-Download Media</span>
+                            <div class="toggle-switch"></div>
+                        </div>
+                        <div class="settings-item">
+                            <span id="set-storage">Keep Media</span>
+                            <div class="toggle-switch"></div>
+                        </div>
+
+                        <div class="settings-section-title" id="set-sec-folders">Chat Folders</div>
+                        <div class="settings-item">
+                            <span id="set-folder-active">Enable Folders</span>
+                            <div class="toggle-switch"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-nav">
+                <button class="nav-item active" data-target="view-chats" id="chats-tab-btn" title="Chats">💬</button>
+                <button class="nav-item" data-target="view-shop" id="shop-tab-btn" title="Gifts">🎁</button>
+                <button class="nav-item" data-target="view-profile" id="profile-tab-btn" title="Profile">👤</button>
+                <button class="nav-item" data-target="view-settings" id="settings-tab-btn" title="Settings">⚙️</button>
+            </div>
+        </div>
+
+        <div class="main-chat-window">
+            <div class="chat-viewport">
+                <div class="chat-viewport-header">
+                    <div class="active-chat-meta">
+                        <h3 id="active-chat-name">Pigeon AI 🤖</h3>
+                        <p id="active-chat-status" class="tg-chat-status">bot</p>
+                    </div>
+                </div>
+                <div class="chat-messages"></div>
+                
+                <div class="chat-input-panel">
+                    <button id="bot-menu-game-btn" class="bot-menu-btn" style="display: none;">🎮 Play Game</button>
+                    <input type="text" id="msg-input" placeholder="Type a message...">
+                    <button id="send-msg-btn">SEND</button>
+                </div>
+            </div>
+
+            <div id="game-overlay-box" class="game-overlay-hidden">
+                <div class="game-header">
+                    <h3 id="active-game-title">Game</h3>
+                    <button id="close-game-btn">&times;</button>
+                </div>
+                <div id="game-sandbox-body"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
